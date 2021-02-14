@@ -1,0 +1,35 @@
+<html>
+<head>
+  <title>Student_Info</title>
+</head>
+<body bgcolor = "#38A8CA">
+<form action = "roll.php" method="post">
+     <div align = "center">
+         <h1> SCORES OF STUDENT</h1>
+<?php
+$servername = "localhost:3307";
+$username = "root";
+$password = '';
+$database_name = "student";
+
+$conn = mysqli_connect($servername, $username, $password, $database_name);
+if (!$conn) {
+    die("Connection Failed:" . mysqli_connect_error());
+}
+
+$query = "SELECT name, scores FROM students";
+$result = mysqli_query($conn, $query); 
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo  " Name: " . $row["name"] ." || SCORE: " . $row["scores"] . "<br>";
+    }
+} 
+else {
+    echo "0 results";
+}
+mysqli_close($conn);
+?>
+
+   
+</form>
+</html>
